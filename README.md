@@ -1,5 +1,5 @@
 # Manifold Learning
-Exploring manifold learning in collaboration with Claude Sonnet. 
+Exploring manifold learning in collaboration with Artificial Intelligence (Claude, Gemini, ...). 
 
 
 *** in progress
