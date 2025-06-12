@@ -259,49 +259,6 @@ def create_spiral_torus(num_torus=5, center=[0, 0, 0], radius=4, height_step=2, 
 
     return torus
 
-# def torus_parametric(u, v, center, major_radius, minor_radius, axis=[0, 0, 1]):
-#     """
-#     Parametric equation of a torus (copy from previous code)
-#     """
-#     c = np.array(center)
-#     axis = np.array(axis) / np.linalg.norm(axis)
-
-#     x = (major_radius + minor_radius * np.cos(v)) * np.cos(u)
-#     y = (major_radius + minor_radius * np.cos(v)) * np.sin(u)
-#     z = minor_radius * np.sin(v)
-
-#     points = np.array([x, y, z])
-
-#     if not np.allclose(axis, [0, 0, 1]):
-#         z_axis = np.array([0, 0, 1])
-#         if np.allclose(axis, -z_axis):
-#             rotation_matrix = np.array([[-1, 0, 0], [0, -1, 0], [0, 0, 1]])
-#         else:
-#             v_rot = np.cross(z_axis, axis)
-#             s = np.linalg.norm(v_rot)
-#             c_rot = np.dot(z_axis, axis)
-
-#             if s != 0:
-#                 vx = np.array([[0, -v_rot[2], v_rot[1]], [v_rot[2], 0, -v_rot[0]], [-v_rot[1], v_rot[0], 0]])
-#                 rotation_matrix = np.eye(3) + vx + np.dot(vx, vx) * ((1 - c_rot) / (s * s))
-#             else:
-#                 rotation_matrix = np.eye(3)
-
-#         if points.ndim == 2:
-#             points = np.dot(rotation_matrix, points)
-#         else:
-#             points = np.dot(rotation_matrix, points.reshape(3, -1)).reshape(points.shape)
-
-#     # Add center with correct broadcasting
-#     c = np.array(center)
-#     # Ensure center has the same number of dimensions as points for broadcasting
-#     # points shape is (3, num_v, num_u)
-#     c_reshaped = c.reshape(3, 1, 1) # Reshape to (3, 1, 1)
-#     points = points + c_reshaped
-
-
-#     return points[0], points[1], points[2]
-
 def plot_multi_torus_projection():
     """
     Plot multiple torus and projections
@@ -535,37 +492,6 @@ def analyze_multi_torus_projection():
         all_projs, all_dists = project_to_multiple_torus(point, infinity_torus, 'all')
         print(f"  All Distances: {[f'{d:.3f}' for d in all_dists]}")
 
-# Practical examples
-if __name__ == "__main__":
-    print("=== Projection onto Multiple torus ===\n")
-
-    # Infinity shape example
-    infinity_torus = create_infinity_shape_torus()
-    point = [0, 3, 1]
-
-    print("Infinity Shape:")
-    print(f"Torus 1: Center {infinity_torus[0]['center']}, Radius {infinity_torus[0]['major_radius']}")
-    print(f"Torus 2: Center {infinity_torus[1]['center']}, Radius {infinity_torus[1]['major_radius']}")
-    print(f"Test point: {point}\n")
-
-    # Projection with different methods
-    proj_closest, closest_idx = project_to_multiple_torus(point, infinity_torus, 'closest')
-    proj_weighted, weights = project_to_multiple_torus(point, infinity_torus, 'weighted')
-
-    print("Projection Results:")
-    print(f"Closest: {proj_closest} (Torus {closest_idx+1})")
-    print(f"Weighted: {proj_weighted}")
-    print(f"Weights: {weights}")
-
-    print(f"\nClosest Distance: {np.linalg.norm(np.array(point) - proj_closest):.3f}")
-    print(f"Weighted Distance: {np.linalg.norm(np.array(point) - proj_weighted):.3f}")
-
-    # Full analysis
-    print("\n" + "="*50)
-    analyze_multi_torus_projection()
-
-    print("\nFor plotting graphs:")
-    print("plot_multi_torus_projection()")
 
 import unittest
 import numpy as np
