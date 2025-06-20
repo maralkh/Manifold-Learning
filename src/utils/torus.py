@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-from sphere import *
+from src.remove.sphere import *
 
 def project_to_torus(point, center, major_radius, minor_radius, axis=[0, 0, 1]):
     """
